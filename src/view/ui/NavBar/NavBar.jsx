@@ -2,8 +2,7 @@ import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Cart from "../Cart/Cart"
+import Cart from "../../components/Cart/Cart"
 
 const myStyles = {
   txt: {
@@ -19,9 +18,7 @@ const NavBar = (props) => {
         <Typography variant="h6" component="div" sx={myStyles.txt}>
           react-meals
         </Typography>
-        <Button color="inherit">
-          
-        </Button>
+        <Cart/>
       </Toolbar>
     </AppBar>
   );

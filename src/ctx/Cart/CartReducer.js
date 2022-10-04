@@ -1,12 +1,9 @@
 import React from "react";
 
-function CartReducer(state, action) {
+const CartReducer = (state, action) => {
   switch (action.type) {
     case "UPDATE_CART":
-      return {
-        ...state,
-        cart: action.payload,
-      };
+      return state;
     default:
       return state;
   }

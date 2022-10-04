@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
-import NavBar from "../components/NavBar/NavBar";
+import React from "react";
+import NavBar from "../ui/NavBar/NavBar";
 import Meals from "./MealsPage";
+import CartContextProvider from "../../ctx/Cart/CartProvider";
 
 const View = () => {
 
   return (
     <>
+    <CartContextProvider>
       <NavBar />
-      <Meals toCart={handleAdd} />
+      <Meals />
+    </CartContextProvider>
     </>
   );
 };
