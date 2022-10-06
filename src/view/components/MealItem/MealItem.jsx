@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from "react";
+import React, { useState, Fragment, useEffect, useContext } from "react";
 import Grid from "@mui/material/Grid";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -6,6 +6,8 @@ import Select from "@mui/material/Select";
 import IconButton from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import CartContext from "../../../ctx/Cart/CartContext";
+import CartAction from "../../../ctx/Cart/Actions"
 
 const myStyles = {
   txt: {
@@ -31,9 +33,12 @@ const myStyles = {
 
 const Item = (props) => {
   const { data } = props;
+  const actions = CartAction;
 
   const [qty, setQty] = useState(0);
   const [range, setRange] = useState([0]);
+
+  const { dispatch } = useContext(CartContext)
 
   const handleChange = (event) => {
     setQty(event.target.value);
@@ -52,6 +57,14 @@ const Item = (props) => {
       console.log("error must be more than zero");
       return;
     }
+
+    dispatch({
+      type: actions.ADD_TO_CART,
+      payload: {
+        data,
+        quantity: qty,
+      },
+    });
 
     setQty(0);
   };
@@ -93,8 +106,18 @@ const Item = (props) => {
           <AddShoppingCartIcon />
         </IconButton>
       </Grid>
+      {/* img grid */}
+      <Grid item xs={4} lg={1}>
+        <Fragment>
+        <img
+            src="https://picsum.photos/100/100"
+            alt="food img"
+            loading="lazy"
+          />
+        </Fragment>
+      </Grid>
       {/* data grid */}
-      <Grid item xs={4} lg={7}>
+      <Grid item xs={4} lg={6}>
         <Fragment>
           <Typography gutterBottom variant="subtitle1" sx={myStyles.title}>
             {data.name}

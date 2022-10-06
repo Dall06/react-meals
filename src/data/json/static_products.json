@@ -1,0 +1,38 @@
+[
+    {
+        "id": "1",
+        "name": "Taco al pastor",
+        "description": "Taco con carne al pastor y piña",
+        "price": 15.1
+    },
+    {
+        "id": "2",
+        "name": "Taco de chorizo",
+        "description": "Taco con chorizo",
+        "price": 16.1
+    },
+    {
+        "id": "3",
+        "name": "Torta de jamon",
+        "description": "Torta rellena de jamon, lechuga y jitomate",
+        "price": 20.1
+    },
+    {
+        "id": "4",
+        "name": "Taco al pastor",
+        "description": "Taco con carne al pastor y piña",
+        "price": 15.1
+    },
+    {
+        "id": "5",
+        "name": "Taco de chorizo",
+        "description": "Taco con chorizo",
+        "price": 16.1
+    },
+    {
+        "id": "6",
+        "name": "Torta de jamon",
+        "description": "Torta rellena de jamon, lechuga y jitomate",
+        "price": 20.1
+    }
+]

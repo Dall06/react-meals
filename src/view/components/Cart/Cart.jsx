@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Button from "@mui/material/Button";
-import OrderModal from "../../ui/Modal/Modal";
+import OrderModal from "../../ui/Modal/OrderModal";
+import CartContext from "../../../ctx/Cart/CartContext";
 
 const Cart = (props) => {
   const [open, setOpen] = React.useState(false);
@@ -11,6 +12,8 @@ const Cart = (props) => {
     setOpen(false)
   };
 
+  const { state, dispatch } = useContext(CartContext);
+
   return (
     <>
       <Button variant="contained" startIcon={<ShoppingCartIcon />} onClick={handleOpen}>
@@ -18,7 +21,7 @@ const Cart = (props) => {
       </Button>
       {
         open && (
-          <OrderModal open={open} onClose={handleClose} cart={[]}/>
+          <OrderModal open={open} onClose={handleClose} cart={state.cart} />
         )
       }
     </>

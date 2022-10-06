@@ -8,6 +8,8 @@ import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckIcon from "@mui/icons-material/Check";
 import Stack from "@mui/material/Stack";
+import List from "@mui/material/List";
+import CartItem from "../../components/CartItem/CartItem";
 
 const myStyles = {
   box: {
@@ -15,7 +17,7 @@ const myStyles = {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 400,
+    width: "80%",
     bgcolor: "#121212",
     border: "2px solid #000",
     boxShadow: 24,
@@ -39,19 +41,18 @@ const myStyles = {
   buttonBox: {
     marginTop: "2rem",
   },
-  closeIcon: {
-    color: "#d32f2f",
+  container: {
+    display: "flex",
   },
-  closeButton: {
-    color: "#d32f2f",
-    borderColor: "#d32f2f",
-    '&:hover': {
-      backgroundColor: '#fa7a7a',
-      borderColor: '#d32f2f',
-      boxShadow: 'none',
-    },
-  },
-  
+  list: {
+    width: "100%",
+    position: "relative",
+    overflow: "auto",
+    maxHeight: "100%",
+  }, 
+  divider: {
+    margin: "1rem"
+  }
 };
 
 function OrderModal(props) {
@@ -60,7 +61,7 @@ function OrderModal(props) {
   const [total, setTotal] = useState();
 
   const handleSetTotal = () => {
-    const sum = cart.reduce((s, m) => s + m.price, 0);
+    const sum = cart.reduce((s, m) => s + (m.price * m.quantity), 0);
     setTotal(sum);
   };
 
@@ -76,7 +77,7 @@ function OrderModal(props) {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Grid sx={myStyles.box}>
+      <Grid sx={myStyles.box} container>
         <Grid item>
           <Typography
             id="modal-modal-title"
@@ -87,39 +88,23 @@ function OrderModal(props) {
             Meals order
           </Typography>
         </Grid>
-        <Grid item>
+        <Grid item container sx={myStyles.container}>
           {cart.length > 0 ? (
-            cart.map((meal, key) => (
-              <>
-                <Grid item xs={4} md={8} key={key}>
-                  <Typography
-                    gutterBottom
-                    variant="subtitle1"
-                    sx={myStyles.title}
-                  >
-                    {meal.name}
-                  </Typography>
-                  <Grid item>
-                    <Typography variant="body2" gutterBottom sx={myStyles.txt}>
-                      {meal.price}
-                    </Typography>
-                    <Typography variant="body2" gutterBottom sx={myStyles.txt}>
-                      {meal.qty}
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </>
-            ))
+            <List dense={true} sx={myStyles.list}>
+              {
+                cart.map((meal) => (
+                  <CartItem key={meal.id} data={meal} />
+                ))
+              }
+            </List>
           ) : (
-            <Grid item xs={4} md={8}>
-              <Typography gutterBottom variant="subtitle1" sx={myStyles.txt}>
-                no meals in your order
-              </Typography>
-            </Grid>
+            <Typography gutterBottom variant="subtitle1" sx={myStyles.txt}>
+              no meals in your order
+            </Typography>
           )}
         </Grid>
-        <Divider />
-        <Grid item>
+        <Divider sx={myStyles.divider}/>
+        <Grid item container>
           <Stack direction="row" spacing={2}>
             <Typography id="modal-modal-description" sx={myStyles.txt}>
               order cost
@@ -127,17 +112,16 @@ function OrderModal(props) {
             <Typography sx={myStyles.price}>${total}</Typography>
           </Stack>
         </Grid>
-        <Grid container sx={myStyles.buttonBox}>
+        <Grid item container sx={myStyles.buttonBox}>
           <Stack direction="row" spacing={2}>
             <Button
               variant="outlined"
-              startIcon={<CloseIcon sx={myStyles.closeIcon}/>}
-              sx={myStyles.closeButton}
+              startIcon={<CloseIcon />}
               onClick={props.onClose}
             >
               Close
             </Button>
-            <Button variant="contained" endIcon={<CheckIcon/>}>
+            <Button variant="contained" endIcon={<CheckIcon />}>
               Order
             </Button>
           </Stack>

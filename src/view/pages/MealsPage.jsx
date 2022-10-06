@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useContext} from "react";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import MealsList from "../components/MealsList/MealsList";
+import MealsContext from "../../ctx/Meals/MealsContext";
 
 const myStyles = {
   container: {
@@ -25,46 +26,8 @@ const myStyles = {
   },
 };
 
-const list = [
-  {
-    id: "1",
-    name: "Taco al pastor",
-    description: "Taco con carne al pastor y piña",
-    price: 15.1,
-  },
-  {
-    id: "2",
-    name: "Taco de chorizo",
-    description: "Taco con chorizo",
-    price: 16.1,
-  },
-  {
-    id: "3",
-    name: "Torta de jamon",
-    description: "Torta rellena de jamon, lechuga y jitomate",
-    price: 20.1,
-  },
-  {
-    id: "4",
-    name: "Taco al pastor",
-    description: "Taco con carne al pastor y piña",
-    price: 15.1,
-  },
-  {
-    id: "5",
-    name: "Taco de chorizo",
-    description: "Taco con chorizo",
-    price: 16.1,
-  },
-  {
-    id: "6",
-    name: "Torta de jamon",
-    description: "Torta rellena de jamon, lechuga y jitomate",
-    price: 20.1,
-  },
-];
-
-const Meals = (props) => {
+const MealsPage = () => {
+  const { meals } = useContext(MealsContext);
 
   return (
     <>
@@ -81,7 +44,7 @@ const Meals = (props) => {
         </Grid>
         <Grid item xs>
           <Paper elevation={2} sx={myStyles.paper}>
-            <MealsList mealList={list} toCart={props.toCart}/>
+            <MealsList list={meals} />
           </Paper>
         </Grid>
       </Grid>
@@ -89,4 +52,4 @@ const Meals = (props) => {
   );
 };
 
-export default Meals;
+export default MealsPage;
