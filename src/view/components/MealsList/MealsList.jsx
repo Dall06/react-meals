@@ -1,7 +1,8 @@
 import React, { Fragment } from "react";
 import List from "@mui/material/List";
 import MealItem from "../MealItem/MealItem";
-import Divider from "@mui/material/Divider"
+import Divider from "@mui/material/Divider";
+import Typography from "@mui/material/Typography";
 
 const myStyles = {
   list: {

@@ -7,7 +7,7 @@ import ListItemText from "@mui/material/ListItemText";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ButtonGroup from '@mui/material/ButtonGroup';
 import CartContext from "../../context/CartContext/CartContext";
-import CartAction from "../../context/CartContext/Actions"
+import CartAction from "../../context/CartContext/Actions";
 
 const myStyles = {
   box: {
