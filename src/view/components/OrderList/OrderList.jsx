@@ -1,11 +1,6 @@
 import React, { Fragment } from "react";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import CloseIcon from "@mui/icons-material/Close";
-import CheckIcon from "@mui/icons-material/Check";
 import OrderItem from "../OrderItem/OrderItem";
 
 const myStyles = {

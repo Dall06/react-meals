@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import CartContext from "../../context/CartContext/CartContext";
 import CartAction from "../../context/CartContext/Actions";
-import ErrorSnackBar from "../../resources/SnackBar/ErrorSnackBar";
+import ErrorSnackBar from "../../common/SnackBar/ErrorSnackBar";
 
 const myStyles = {
   txt: {

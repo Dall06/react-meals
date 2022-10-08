@@ -4,7 +4,6 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import images from "../../../cmd/Config.js"
-import { height } from "@mui/system";
 
 const myStyles = {
   container: {

@@ -1,14 +1,6 @@
-import React, { useState, Fragment, useEffect, useContext } from "react";
+import React, { Fragment } from "react";
 import Grid from "@mui/material/Grid";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-import IconButton from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import CartContext from "../../context/CartContext/CartContext";
-import CartAction from "../../context/CartContext/Actions";
-import ErrorSnackBar from "../../resources/SnackBar/ErrorSnackBar";
 
 const myStyles = {
   txt: {

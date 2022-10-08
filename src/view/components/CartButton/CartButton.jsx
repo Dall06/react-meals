@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Button from "@mui/material/Button";
-import OrderModal from "../../resources/Modal/OrderModal";
+import OrderModal from "../../common/Modal/OrderModal";
 import CartContext from "../../context/CartContext/CartContext";
 
 const CartButton = (props) => {
