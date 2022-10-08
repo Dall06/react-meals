@@ -40,6 +40,7 @@ const myStyles = {
   },
   buttonBox: {
     marginTop: "2rem",
+    justifyContent: "end",
   },
   container: {
     display: "flex",
@@ -52,17 +53,20 @@ const myStyles = {
   }, 
   divider: {
     margin: "1rem"
+  },
+  button: {
+    textTransform: 'none',
   }
 };
 
 const OrderModal = (props) => {
-  const { cart, total } = props;
+  const { cart, total, open, onClose, checkout } = props;
 
   // return ReactDOM.createPortal(
   return createPortal(
     <Modal
-      open={props.open}
-      onClose={props.onClose}
+      open={open}
+      onClose={onClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
@@ -85,7 +89,7 @@ const OrderModal = (props) => {
             </List>
           ) : (
             <Typography gutterBottom sx={myStyles.txt}>
-              no meals in your order
+              Your order is empty...
             </Typography>
           )}
         </Grid>
@@ -93,7 +97,7 @@ const OrderModal = (props) => {
         <Grid item container>
           <Stack direction="row" spacing={2}>
             <Typography sx={myStyles.txt}>
-              order cost
+              Order cost
             </Typography>
             <Typography sx={myStyles.price}>${total}</Typography>
           </Stack>
@@ -103,10 +107,15 @@ const OrderModal = (props) => {
             <Button
               startIcon={<CloseIcon />}
               onClick={props.onClose}
+              sx={myStyles.button}
             >
               Close
             </Button>
-            <Button variant="contained" endIcon={<CheckIcon />}>
+            <Button 
+              variant="contained"
+              sx={myStyles.button}
+              onClick={checkout}
+              endIcon={<CheckIcon />}>
               Order
             </Button>
           </Stack>

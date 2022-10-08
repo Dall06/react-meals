@@ -5,6 +5,7 @@ import {
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
 import HomePage from "../pages/HomePage/HomePage";
 import MealsPage from "../pages/MealsPage/MealsPage";
+import CheckOutPage from "../pages/CheckOutPage/CheckOutPage";
 
 const Router = createBrowserRouter([
   {
@@ -24,6 +25,11 @@ const Router = createBrowserRouter([
             indexindex: true,
             path: "/meals",
             element: <MealsPage />
+          },
+          {
+            indexindex: true,
+            path: "/check-out",
+            element: <CheckOutPage />
           }
         ]
       }

@@ -1,6 +1,16 @@
 import Actions from "./Actions";
 
 export const CartReducer = (state, action) => {
+  const handleTotal = (cart) => {
+    const sum = cart.reduce((s, m) => s + (m.price * m.quantity), 0);
+    return sum;
+  };
+
+  const handleQty = (cart) => {
+    const sum = cart.reduce((s, m) => s + m.quantity, 0);
+    return sum;
+  };
+
   const addMeal = (meal, quantity, state) => {
     const updatedCart = [...state.cart];
     const foundIndex = updatedCart.findIndex(
@@ -9,13 +19,18 @@ export const CartReducer = (state, action) => {
 
     if (foundIndex < 0) {
       updatedCart.push({ ...meal, quantity: quantity });
+      const qty = handleQty(updatedCart)
+      const total = handleTotal(updatedCart)
+      return { ...state, cart: updatedCart, quantity: qty, total: total };
     }
 
     const updatedItem = { ...updatedCart[foundIndex] };
     updatedItem.quantity += quantity;
     updatedCart[foundIndex] = updatedItem;
 
-    return { ...state, cart: updatedCart };
+    const qty = handleQty(updatedCart)
+    const total = handleTotal(updatedCart)
+    return { ...state, cart: updatedCart, quantity: qty, total: total };
   };
 
   const removeMeal = (id, state) => {
@@ -26,7 +41,9 @@ export const CartReducer = (state, action) => {
     updatedCart.splice(foundIndex, 1);
     updatedItem.quantity--;
 
-    return { ...state, cart: updatedCart };
+    const qty = handleQty(updatedCart)
+    const total = handleTotal(updatedCart)
+    return { ...state, cart: updatedCart, quantity: qty, total: total };
   };
 
   const minusCount = (id, state) => {
@@ -43,7 +60,9 @@ export const CartReducer = (state, action) => {
 
     updatedCart[foundIndex] = updatedItem;
 
-    return { ...state, cart: updatedCart };
+    const qty = handleQty(updatedCart)
+    const total = handleTotal(updatedCart)
+    return { ...state, cart: updatedCart, quantity: qty, total: total };
   }
 
   const addCount = (id,state) => {
@@ -54,7 +73,9 @@ export const CartReducer = (state, action) => {
     updatedItem.quantity++;
     updatedCart[foundIndex] = updatedItem;
 
-    return { ...state, cart: updatedCart };
+    const qty = handleQty(updatedCart)
+    const total = handleTotal(updatedCart)
+    return { ...state, cart: updatedCart, quantity: qty, total: total };
   }
 
   switch (action.type) {

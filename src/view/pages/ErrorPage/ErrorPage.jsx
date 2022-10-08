@@ -1,9 +1,11 @@
 import React from "react";
-import { useRouteError, Link } from "react-router-dom";
+import { useRouteError, useNavigate, Link } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { Box } from "@mui/material";
+import Button from "@mui/material/Button";
+
 
 const myStyles = {
   container: {
@@ -40,6 +42,15 @@ const myStyles = {
 const ErrorPage = () => {
   const error = useRouteError();
   console.log(error)
+
+  const navigate = useNavigate();
+
+  const handleGoToHome = (event) => {
+    event.preventDefault();
+    navigate('/');
+  }
+
+
   return (
     <>
       <Grid container spacing={3} sx={myStyles.container}>
@@ -53,14 +64,12 @@ const ErrorPage = () => {
                 {error.status}
               </Typography>
               <Typography paragraph={true}>
-                {error.statusText}
+                {error.statusText || error.message}
               </Typography>
             </Box>
-            <Link to={`/`} sx={myStyles.linkTxt}>
-              <Typography paragraph={true} sx={myStyles.txt}>
-                click me to return
-              </Typography>
-            </Link>
+            <Button onClick={handleGoToHome} sx={[myStyles.linkTxt, myStyles.txt]}>
+              <Link>Click me to return</Link>
+            </Button>
           </Paper>
         </Grid>
       </Grid>

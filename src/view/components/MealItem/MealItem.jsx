@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import CartContext from "../../context/CartContext/CartContext";
 import CartAction from "../../context/CartContext/Actions";
+import ErrorSnackBar from "../../resources/SnackBar/ErrorSnackBar";
 
 const myStyles = {
   txt: {
@@ -31,14 +32,24 @@ const myStyles = {
   }
 };
 
-const Item = (props) => {
+const MealItem = (props) => {
   const { data } = props;
   const actions = CartAction;
 
   const [qty, setQty] = useState(0);
   const [range, setRange] = useState([0]);
+  const [open, setOpen] = React.useState(false);
 
   const { dispatch } = useContext(CartContext)
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
 
   const handleChange = (event) => {
     setQty(event.target.value);
@@ -55,6 +66,7 @@ const Item = (props) => {
 
     if (qty === 0) {
       console.log("error must be more than zero");
+      setOpen(true);
       return;
     }
 
@@ -133,8 +145,13 @@ const Item = (props) => {
           ${data.price}
         </Typography>
       </Grid>
+      {
+        open && (
+          <ErrorSnackBar open={open} handleClose={handleClose} msg="Error: you cant order 0 products"/>
+        )
+      }
     </Grid>
   );
 };
 
-export default Item;
+export default MealItem;

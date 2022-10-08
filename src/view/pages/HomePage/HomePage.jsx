@@ -31,7 +31,7 @@ const myStyles = {
   },
   img: {
     margin: "1rem",
-    width: "15%",
+    width: "20%",
     height: "90%"
   }
 };

@@ -1,12 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Cart from "../../components/CartList/CartList"
+import CartButton from "../../components/CartButton/CartButton"
 import Box from "@mui/material/Box"
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 const myStyles = {
   txt: {
@@ -32,8 +32,23 @@ const myStyles = {
   }
 };
 
-const NavBar = (props) => {
-  const pages = ['welcome', 'meals'];
+const NavBar = () => {
+  const navigate = useNavigate();
+
+  const handleGoToHome = (event) => {
+    event.preventDefault();
+    navigate('/');
+  }
+
+  const handleGoToMeals = (event) => {
+    event.preventDefault();
+    navigate('/meals');
+  }
+
+  const handleGoToCheckOut = (event) => {
+    event.preventDefault();
+    navigate('/check-out');
+  }
 
   return (
     <>
@@ -44,18 +59,17 @@ const NavBar = (props) => {
               href="/"
               sx={myStyles.txt}
             >
-              react-meals
+              React-Meals
             </Typography>
             <Box sx={myStyles.box}>
-              <Link to={`/`} sx={myStyles.linkTxt}>
-                <Button sx={myStyles.button} variant="contained">home</Button>
-              </Link>
-              <Link to={`meals/`} sx={myStyles.linkTxt}>
-                <Button sx={myStyles.button} variant="contained">meals</Button>
-              </Link>
+              <Button sx={myStyles.button} variant="contained" onClick={handleGoToHome}>Home</Button>
+              <Button
+                sx={myStyles.button}
+                variant="contained"
+                onClick={handleGoToMeals}>Meals</Button>
             </Box>
             <Box sx={myStyles.flex0}>
-              <Cart />
+              <CartButton checkout={handleGoToCheckOut}/>
             </Box>
           </Toolbar>
         </Container>
