@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MelasContext from "./MealsContext";
 // import meals from "../../data/json/static_products.json"
-import UseHttp from "../../hooks/use-http"
+import UseHttp from "../../../hooks/use-http"
 
 const MelasProvider = (props) => {
   const BASE_URL = "https://my-tests-ee27a-default-rtdb.firebaseio.com/"

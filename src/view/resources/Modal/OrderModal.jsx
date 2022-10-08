@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { createPortal } from "react-dom";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
@@ -56,18 +56,7 @@ const myStyles = {
 };
 
 const OrderModal = (props) => {
-  const { cart } = props;
-
-  const [total, setTotal] = useState();
-
-  const handleSetTotal = () => {
-    const sum = cart.reduce((s, m) => s + (m.price * m.quantity), 0);
-    setTotal(sum);
-  };
-
-  useEffect(() => {
-    handleSetTotal();
-  });
+  const { cart, total } = props;
 
   // return ReactDOM.createPortal(
   return createPortal(
@@ -80,9 +69,6 @@ const OrderModal = (props) => {
       <Grid sx={myStyles.box} container>
         <Grid item>
           <Typography
-            id="modal-modal-title"
-            variant="h6"
-            component="h2"
             sx={myStyles.title}
           >
             Meals order
@@ -98,7 +84,7 @@ const OrderModal = (props) => {
               }
             </List>
           ) : (
-            <Typography gutterBottom variant="subtitle1" sx={myStyles.txt}>
+            <Typography gutterBottom sx={myStyles.txt}>
               no meals in your order
             </Typography>
           )}
@@ -106,7 +92,7 @@ const OrderModal = (props) => {
         <Divider sx={myStyles.divider}/>
         <Grid item container>
           <Stack direction="row" spacing={2}>
-            <Typography id="modal-modal-description" sx={myStyles.txt}>
+            <Typography sx={myStyles.txt}>
               order cost
             </Typography>
             <Typography sx={myStyles.price}>${total}</Typography>
@@ -115,7 +101,6 @@ const OrderModal = (props) => {
         <Grid item container sx={myStyles.buttonBox}>
           <Stack direction="row" spacing={2}>
             <Button
-              variant="outlined"
               startIcon={<CloseIcon />}
               onClick={props.onClose}
             >

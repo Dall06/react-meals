@@ -1,8 +1,8 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment } from "react";
 import List from "@mui/material/List";
 import MealItem from "../MealItem/MealItem";
 import Divider from "@mui/material/Divider"
-import MealsContext from "../../../ctx/Meals/MealsContext";
+import MealsContext from "../../context/MealsContext/MealsContext";
 
 const myStyles = {
   list: {

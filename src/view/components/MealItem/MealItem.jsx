@@ -6,8 +6,8 @@ import Select from "@mui/material/Select";
 import IconButton from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import CartContext from "../../../ctx/Cart/CartContext";
-import CartAction from "../../../ctx/Cart/Actions"
+import CartContext from "../../context/CartContext/CartContext";
+import CartAction from "../../context/CartContext/Actions";
 
 const myStyles = {
   txt: {

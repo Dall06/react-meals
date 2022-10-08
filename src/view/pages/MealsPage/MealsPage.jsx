@@ -2,8 +2,8 @@ import React, {useContext} from "react";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import MealsList from "../components/MealsList/MealsList";
-import MealsContext from "../../ctx/Meals/MealsContext";
+import MealsList from "../../components/MealsList/MealsList";
+import MealsContext from "../../context/MealsContext/MealsContext";
 
 const myStyles = {
   container: {
@@ -18,7 +18,7 @@ const myStyles = {
     padding: "1rem",
   },
   alignment: {
-    textAlign: "center",
+    textAlign: "start",
   },
   h4: {
     fontWeight: "bold",
@@ -35,10 +35,10 @@ const MealsPage = () => {
         <Grid item lg={12} xs={12} rowSpacing={3}>
           <Paper elevation={2} sx={[myStyles.paper, myStyles.alignment]}>
             <Typography variant="h4" sx={myStyles.h4}>
-              Welcome to react demo app
+              Let me show you our meals
             </Typography>
             <Typography paragraph={true}>
-              Feel free to test the app by adding meals to your shopping cart
+              Choose as many as you wish
             </Typography>
           </Paper>
         </Grid>

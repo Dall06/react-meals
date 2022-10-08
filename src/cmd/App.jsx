@@ -1,4 +1,4 @@
-import View from '../view/pages/View';
+import View from '../view/View';
 import './App.css';
 
 const App = () => {
