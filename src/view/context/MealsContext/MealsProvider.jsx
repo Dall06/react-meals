@@ -8,17 +8,18 @@ const MelasProvider = (props) => {
 
   const { isLoading, error, request } = UseHttp();
   const [meals, setMeals] = useState([]);
-  
 
-  const fetchUser = async () => {
-    const url = `${BASE_URL}/meals.json?orderBy="$key"`;
+  const fetchMeals = async () => {
+    const url = `${BASE_URL}/meals.json`;
     const data = await request({ url });
-    
-    setMeals(data)
+    const list = data.filter(e => {
+      return e !== null;
+    });
+    setMeals(list)
   };
 
   useEffect(() => {
-    fetchUser()
+    fetchMeals();
   }, [request]);
 
   return (

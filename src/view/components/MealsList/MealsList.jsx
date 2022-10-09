@@ -1,15 +1,15 @@
 import React, { Fragment } from "react";
 import List from "@mui/material/List";
 import MealItem from "../MealItem/MealItem";
-import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
+import { useNavigate } from "react-router-dom";
 
 const myStyles = {
   list: {
     width: "100%",
     position: "relative",
     overflow: "auto",
-    maxHeight: "100%",
+    maxHeight: "80vh",
   }
 }
 
@@ -22,8 +22,7 @@ const MealsList = (props) => {
         <List sx={myStyles.list}>
           {list.map((m, key) => (
             <Fragment key={key}>
-              <MealItem key={m.id} data={m} />
-              <Divider />
+              <MealItem key={m.id} data={m} id={m.id} />
             </Fragment>
           ))}
         </List>

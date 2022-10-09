@@ -5,10 +5,12 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import IconButton from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import CartContext from "../../context/CartContext/CartContext";
 import CartAction from "../../context/CartContext/Actions";
 import ErrorSnackBar from "../../common/SnackBar/ErrorSnackBar";
+import { useNavigate } from "react-router-dom";
 
 const myStyles = {
   txt: {
@@ -29,11 +31,22 @@ const myStyles = {
   },
   iconButton: {
     boxShadow: 3
+  },
+  button: {
+    textDecoration: "none",
+    textTransform: 'none',
+    fontWeight: "bold",
+    color: "rgba(255, 255, 255, 0.7)"
+  },
+  image: {
+    width: "100%",
+    height: "5rem",
   }
 };
 
 const MealItem = (props) => {
-  const { data } = props;
+  const { data, id } = props;
+  const navigate = useNavigate();
   const actions = CartAction;
 
   const [qty, setQty] = useState(0);
@@ -49,7 +62,6 @@ const MealItem = (props) => {
 
     setOpen(false);
   };
-
 
   const handleChange = (event) => {
     setQty(event.target.value);
@@ -84,6 +96,11 @@ const MealItem = (props) => {
   useEffect(() => {
     handleRange(0, 25);
   }, []);
+
+  const handleGoToDetail = (event) => {
+    event.preventDefault();
+    navigate(`/meals/${id}`)
+  }
 
   return (
     <Grid container spacing={2}>
@@ -122,9 +139,10 @@ const MealItem = (props) => {
       <Grid item xs={4} lg={1}>
         <Fragment>
         <img
-            src="https://picsum.photos/100/100"
+            src={data.image}
             alt="food img"
             loading="lazy"
+            style={myStyles.image}
           />
         </Fragment>
       </Grid>
@@ -144,6 +162,7 @@ const MealItem = (props) => {
         <Typography variant="subtitle1" component="div" sx={myStyles.price}>
           ${data.price}
         </Typography>
+        <Button sx={myStyles.button} onClick={handleGoToDetail}>More...</Button>
       </Grid>
       {
         open && (
