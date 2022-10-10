@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
@@ -9,6 +9,8 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckIcon from "@mui/icons-material/Check";
+import ErrorSnackBar from "../../common/SnackBar/ErrorSnackBar";
+import { useNavigate } from "react-router-dom";
 
 const myStyles = {
   container: {
@@ -27,7 +29,7 @@ const myStyles = {
   },
   h4: {
     fontWeight: "bold",
-    color: "#42a5f5"
+    color: "#42a5f5",
   },
   alignmentStart: {
     textAlign: "start",
@@ -67,20 +69,56 @@ const myStyles = {
     position: "relative",
     overflow: "auto",
     maxHeight: "100%",
-  }, 
+  },
   divider: {
-    margin: "1rem"
+    margin: "1rem",
   },
   button: {
-    textTransform: 'none',
+    textTransform: "none",
   },
   stack: {
     justifyContent: "end",
-  }
+  },
 };
 
 const CheckOutPage = () => {
   const { state } = useContext(CartContext);
+  const navigate = useNavigate();
+  const [disabled, setDisabled] = useState(false);
+  const [open, setOpen] = React.useState(false);
+
+  const handleBlock = () => {
+    console.log(state.cart.length);
+    const len = state.cart.length;
+    if (len > 0) {
+      setDisabled(false);
+      return;
+    }
+    setDisabled(true);
+    return;
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    setOpen(true);
+  };
+
+  const handleGoToMeals = (event) => {
+    event.preventDefault();
+    navigate("/meals");
+  };
+
+  useEffect(() => {
+    handleBlock();
+  }, [disabled]);
 
   return (
     <>
@@ -102,9 +140,7 @@ const CheckOutPage = () => {
             </Grid>
             <Grid item container style={myStyles.stack}>
               <Stack direction="row" spacing={2}>
-                <Typography sx={myStyles.txt}>
-                  Order cost
-                </Typography>
+                <Typography sx={myStyles.txt}>Order cost</Typography>
                 <Typography sx={myStyles.price}>${state.total}</Typography>
               </Stack>
             </Grid>
@@ -113,15 +149,27 @@ const CheckOutPage = () => {
                 <Button
                   startIcon={<CloseIcon />}
                   sx={myStyles.button}
+                  onClick={handleGoToMeals}
                 >
                   Cancel
                 </Button>
                 <Button
                   variant="contained"
                   sx={myStyles.button}
-                  endIcon={<CheckIcon />}>
+                  disabled={disabled}
+                  onClick={handleClick}
+                  endIcon={<CheckIcon />}
+                >
                   Continue
                 </Button>
+                {open && (
+                  <ErrorSnackBar
+                    open={open}
+                    handleClose={handleClose}
+                    severity="warning"
+                    msg="TODO: method not implemented"
+                  />
+                )}
               </Stack>
             </Grid>
           </Paper>

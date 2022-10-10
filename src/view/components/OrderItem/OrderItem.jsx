@@ -8,7 +8,7 @@ const myStyles = {
     align: "left",
   },
   select: {
-    boxShadow: 3
+    boxShadow: 3,
   },
   title: {
     fontWeight: "bold",
@@ -20,7 +20,11 @@ const myStyles = {
     color: "#0288d1",
   },
   iconButton: {
-    boxShadow: 3
+    boxShadow: 3,
+  },
+  image: {
+    width: "100%",
+    height: "5rem",
   }
 };
 
@@ -32,11 +36,7 @@ const OrderItem = (props) => {
       {/* img grid */}
       <Grid item xs={4} lg={1}>
         <Fragment>
-          <img
-            src="https://picsum.photos/100/100"
-            alt="food img"
-            loading="lazy"
-          />
+          <img src={data.image} alt="food img" loading="lazy" style={myStyles.image}/>
         </Fragment>
       </Grid>
       {/* data grid */}
@@ -47,7 +47,7 @@ const OrderItem = (props) => {
           </Typography>
           <Typography variant="body2" gutterBottom sx={myStyles.txt}>
             {data.description}
-          </Typography >
+          </Typography>
         </Fragment>
       </Grid>
       {/* price grid */}

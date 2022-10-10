@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
@@ -61,6 +61,21 @@ const myStyles = {
 
 const OrderModal = (props) => {
   const { cart, total, open, onClose, checkout } = props;
+  const [disabled, setDisabled] = useState(false);
+
+  const handleBlock = () => {
+    console.log(cart.length)
+    if(cart.length > 0) {
+      setDisabled(false);
+      return;
+    }
+    setDisabled(true);
+    return;
+  };
+
+  useEffect(() => {
+    handleBlock();
+  }, [disabled])
 
   // return ReactDOM.createPortal(
   return createPortal(
@@ -115,6 +130,7 @@ const OrderModal = (props) => {
               variant="contained"
               sx={myStyles.button}
               onClick={checkout}
+              disabled={disabled}
               endIcon={<CheckIcon />}>
               Order
             </Button>

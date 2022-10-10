@@ -17,6 +17,9 @@ const myStyles = {
     lineHeight: "60px",
     padding: "1rem",
   },
+  listPaper: {
+    height: "60vh"
+  },
   alignment: {
     textAlign: "start",
   },
@@ -43,7 +46,7 @@ const MealsPage = () => {
           </Paper>
         </Grid>
         <Grid item xs>
-          <Paper elevation={2} sx={myStyles.paper}>
+          <Paper elevation={2} sx={[myStyles.paper, myStyles.listPaper]}>
             <MealsList list={meals} />
           </Paper>
         </Grid>

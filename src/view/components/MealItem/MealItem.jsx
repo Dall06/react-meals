@@ -166,7 +166,7 @@ const MealItem = (props) => {
       </Grid>
       {
         open && (
-          <ErrorSnackBar open={open} handleClose={handleClose} msg="Error: you cant order 0 products"/>
+          <ErrorSnackBar open={open} handleClose={handleClose} severity="error" msg="Error: you cant order 0 products"/>
         )
       }
     </Grid>

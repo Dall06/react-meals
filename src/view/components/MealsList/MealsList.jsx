@@ -9,7 +9,7 @@ const myStyles = {
     width: "100%",
     position: "relative",
     overflow: "auto",
-    maxHeight: "80vh",
+    maxHeight: "100%",
   }
 }
 
@@ -27,7 +27,7 @@ const MealsList = (props) => {
           ))}
         </List>
       ) : (
-        <Typography gutterBottom sx={myStyles.txt}>
+        <Typography gutterBottom sx={myStyles.txt} role="txt">
           No meals found in our system...
         </Typography>
       )}

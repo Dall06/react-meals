@@ -65,7 +65,7 @@ const OrderList = (props) => {
           ))}
         </List>
       ) : (
-        <Typography gutterBottom sx={myStyles.txt}>
+        <Typography gutterBottom sx={myStyles.txt} role="txt">
           Your order is empty...
         </Typography>
       )}
