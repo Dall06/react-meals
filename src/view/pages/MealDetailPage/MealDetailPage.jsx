@@ -2,38 +2,40 @@ import React, { useState, useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import images from "../../../cmd/Config.js";
 import { useNavigate, useParams } from "react-router-dom";
 import UseHttp from "../../../hooks/use-http"
 
 const myStyles = {
-  container: {
-    display: "flex",
-    padding: "1rem",
-  },
-  paper: {
-    backgroundColor: "#121212",
+  txt: {
     color: "rgba(255, 255, 255, 0.5)",
-    background: "#151515",
-    lineHeight: "60px",
-    padding: "1rem",
-    margin: "1rem"
+    align: "left",
   },
-  alignmentCenter: {
-    textAlign: "center",
+  select: {
+    boxShadow: 3
   },
-  alignmentStart: {
-    textAlign: "start",
-  },
-  h4: {
+  title: {
     fontWeight: "bold",
-    color: "#42a5f5"
+    color: "#e3f2fd",
   },
-  img: {
-    margin: "1rem",
-    width: "20%",
-    height: "90%"
+  price: {
+    fontWeight: "bold",
+    align: "center",
+    color: "#0288d1",
+  },
+  iconButton: {
+    boxShadow: 3
+  },
+  button: {
+    textDecoration: "none",
+    textTransform: 'none',
+    fontWeight: "bold",
+    color: "rgba(255, 255, 255, 0.7)"
+  },
+  image: {
+    width: "100%",
+    height: "5rem",
   }
 };
 
@@ -47,12 +49,12 @@ const MealDetailPage = () => {
   const [meal, setMeal] = useState({});
 
   const fetchMeal = async () => {
-    const url = `${BASE_URL}/meals.json?orderBy="$key"&equalTo="0"`;
-    const data = await request({ url });
-    console.log(data)
-    //setMeal(data)
+    const url = `${BASE_URL}/meals.json?orderBy="$key"&equalTo="${id}"`;
+    const result = await request({ url });
+    // console.log();
+    setMeal(result[id])
   };
-  
+
   const handleGoBack = () => {
     navigate("meals/")
   }
@@ -64,35 +66,34 @@ const MealDetailPage = () => {
 
   return (
     <>
-      <Grid container spacing={3} sx={myStyles.container}>
-        <Grid item lg={12} xs={12} rowSpacing={3}>
-          <Paper elevation={2} sx={[myStyles.paper, myStyles.alignmentCenter]}>
-            <Typography variant="h4" sx={myStyles.h4}>
-              {}
+      <Grid container spacing={2}>
+        {/* img grid */}
+        <Grid item xs={4} lg={1}>
+          <>
+            <img
+              src={meal.image}
+              alt="food img"
+              loading="lazy"
+              style={myStyles.image}
+            />
+          </>
+        </Grid>
+        {/* data grid */}
+        <Grid item xs={4} lg={6}>
+          <>
+            <Typography gutterBottom variant="subtitle1" sx={myStyles.title}>
+              { meal.name}
             </Typography>
-            <Typography paragraph={true}>
-              Im a demo app that shows how to use different react features for development
+            <Typography variant="body2" gutterBottom sx={myStyles.txt}>
+              {meal.description}
             </Typography>
-          </Paper>
-          <Paper elevation={2} sx={[myStyles.paper, myStyles.alignmentStart]}>
-            <Typography variant="h4" sx={myStyles.h4}>
-              This technologies helped to my creation.
-            </Typography>
-            <Box >
-              {
-                images.map(item =>
-                  <img
-                    src={`${item.img}`}
-                    srcSet={`${item.img}`}
-                    alt={item.title}
-                    loading="lazy"
-                    key={item.title}
-                    style={myStyles.img}
-                  />
-                )
-              }
-            </Box>
-          </Paper>
+          </>
+        </Grid>
+        {/* price grid */}
+        <Grid item xs={2} lg={2}>
+          <Typography variant="subtitle1" component="div" sx={myStyles.price}>
+            ${meal.price}
+          </Typography>
         </Grid>
       </Grid>
     </>

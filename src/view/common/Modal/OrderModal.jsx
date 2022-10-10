@@ -69,12 +69,12 @@ const OrderModal = (props) => {
       onClose={onClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
+      id="order-modal"
     >
       <Grid sx={myStyles.box} container>
         <Grid item>
           <Typography
-            sx={myStyles.title}
-          >
+            sx={myStyles.title}>
             Meals order
           </Typography>
         </Grid>
