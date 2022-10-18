@@ -1,0 +1,41 @@
+.box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  background-color: #121212;
+  border: 2px solid #000;
+  box-shadow: 24;
+  padding: 2rem;
+}
+
+.txt {
+  text-align: left;
+  color: rgba(255, 255, 255, 0.5);
+  align-items: left;
+}
+
+.title {
+  text-align: left;
+  font-weight: bold;
+  color: #0288d1;
+}
+
+.price {
+  font-weight: bold;
+  align-items: center;
+  color: #e3f2fd;
+}
+
+.buttonBox {
+  margin-top: 2rem;
+  justify-content: end;
+}
+
+.container {
+  display: flex;
+}
+.button {
+  text-transform: none;
+}

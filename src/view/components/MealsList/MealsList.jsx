@@ -1,17 +1,9 @@
-import React, { Fragment } from "react";
-import List from "@mui/material/List";
-import MealItem from "../MealItem/MealItem";
-import Typography from "@mui/material/Typography";
-import { useNavigate } from "react-router-dom";
-
-const myStyles = {
-  list: {
-    width: "100%",
-    position: "relative",
-    overflow: "auto",
-    maxHeight: "100%",
-  }
-}
+import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
+import List from '@mui/material/List';
+import MealItem from '../MealItem/MealItem';
+import Typography from '@mui/material/Typography';
+import styles from './MealsList.module.css';
 
 const MealsList = (props) => {
   const { list } = props;
@@ -19,20 +11,22 @@ const MealsList = (props) => {
   return (
     <>
       {list.length > 0 ? (
-        <List sx={myStyles.list}>
-          {list.map((m, key) => (
-            <Fragment key={key}>
-              <MealItem key={m.id} data={m} id={m.id} />
-            </Fragment>
+        <List className={styles.list}>
+          {list.map((m) => (
+            <MealItem key={m.id} data={m} id={m.id} />
           ))}
         </List>
       ) : (
-        <Typography gutterBottom sx={myStyles.txt} role="txt">
+        <Typography gutterBottom className={styles.txt} role="txt">
           No meals found in our system...
         </Typography>
       )}
     </>
   );
+};
+
+MealsList.propTypes = {
+  list: PropTypes.array
 };
 
 export default MealsList;

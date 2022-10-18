@@ -1,30 +1,30 @@
-import React, { Fragment } from "react";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
+import React, { Fragment } from 'react';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 
 const myStyles = {
   txt: {
-    color: "rgba(255, 255, 255, 0.5)",
-    align: "left",
+    color: 'rgba(255, 255, 255, 0.5)',
+    align: 'left'
   },
   select: {
-    boxShadow: 3,
+    boxShadow: 3
   },
   title: {
-    fontWeight: "bold",
-    color: "#e3f2fd",
+    fontWeight: 'bold',
+    color: '#e3f2fd'
   },
   price: {
-    fontWeight: "bold",
-    align: "center",
-    color: "#0288d1",
+    fontWeight: 'bold',
+    align: 'center',
+    color: '#0288d1'
   },
   iconButton: {
-    boxShadow: 3,
+    boxShadow: 3
   },
   image: {
-    width: "100%",
-    height: "5rem",
+    width: '100%',
+    height: '5rem'
   }
 };
 
@@ -36,7 +36,7 @@ const OrderItem = (props) => {
       {/* img grid */}
       <Grid item xs={4} lg={1}>
         <Fragment>
-          <img src={data.image} alt="food img" loading="lazy" style={myStyles.image}/>
+          <img src={data.image} alt="food img" loading="lazy" style={myStyles.image} />
         </Fragment>
       </Grid>
       {/* data grid */}

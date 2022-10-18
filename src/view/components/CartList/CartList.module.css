@@ -1,0 +1,36 @@
+.txt {
+  text-align: left;
+  color: rgba(255, 255, 255, 0.5);
+  align-items: left;
+}
+
+.list {
+  width: 100%;
+  position: relative;
+  overflow: auto;
+  max-height: 100%;
+}
+
+.title {
+  text-align: left;
+  font-weight: bold;
+  color: #0288d1;
+}
+
+.price {
+  font-weight: bold;
+  align-items: center;
+  color: #e3f2fd;
+}
+
+.buttonBox {
+  margin-top: 2rem;
+  justify-content: end;
+}
+
+.container {
+  display: flex;
+}
+.button {
+  text-transform: none;
+}

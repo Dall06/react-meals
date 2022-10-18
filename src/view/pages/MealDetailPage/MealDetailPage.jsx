@@ -1,101 +1,175 @@
-import React, { useState, useEffect } from "react";
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Button from "@mui/material/Button";
-import images from "../../../cmd/Config.js";
-import { useNavigate, useParams } from "react-router-dom";
-import UseHttp from "../../../hooks/use-http"
-
-const myStyles = {
-  txt: {
-    color: "rgba(255, 255, 255, 0.5)",
-    align: "left",
-  },
-  select: {
-    boxShadow: 3
-  },
-  title: {
-    fontWeight: "bold",
-    color: "#e3f2fd",
-  },
-  price: {
-    fontWeight: "bold",
-    align: "center",
-    color: "#0288d1",
-  },
-  iconButton: {
-    boxShadow: 3
-  },
-  button: {
-    textDecoration: "none",
-    textTransform: 'none',
-    fontWeight: "bold",
-    color: "rgba(255, 255, 255, 0.7)"
-  },
-  image: {
-    width: "100%",
-    height: "5rem",
-  }
-};
+import React, { useState, useEffect, useContext } from 'react';
+import UseHttp from '../../../core/hooks/use-http';
+import { useNavigate, useParams } from 'react-router-dom';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import SnackBar from '../../common/SnackBar/SnackBar';
+import IconButton from '@mui/material/Button';
+import Button from '@mui/material/Button';
+import CancelIcon from '@mui/icons-material/Cancel';
+import CheckIcon from '@mui/icons-material/Check';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import CartContext from '../../../core/context/CartContext/CartContext';
+import CartActions from '../../../core/context/CartContext/Actions';
+import styles from './MealDetailPage.module.css';
 
 const MealDetailPage = () => {
+  const BASE_URL = 'https://my-tests-ee27a-default-rtdb.firebaseio.com/';
+
+  const actions = CartActions;
+
+  const { request } = UseHttp();
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const BASE_URL = "https://my-tests-ee27a-default-rtdb.firebaseio.com/"
+  const [data, setData] = useState({});
+  const [qty, setQty] = useState(0);
+  const [range, setRange] = useState([0]);
+  const [severity, setSeverity] = useState('error');
+  const [msg, setMsg] = useState('error generating snackbar');
+  const [open, setOpen] = React.useState(false);
 
-  const { isLoading, error, request } = UseHttp();
-  const [meal, setMeal] = useState({});
+  const { dispatch } = useContext(CartContext);
+
+  const handleClose = (event, reason) => {
+    event.preventDefault();
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const handleChange = (event) => {
+    setQty(event.target.value);
+  };
+
+  const handleRange = (start, end) => {
+    const length = end - start;
+    const result = Array.from({ length }, (_, i) => start + i);
+    setRange(result);
+  };
+
+  const handleClick = (event) => {
+    event.preventDefault();
+
+    if (qty === 0) {
+      setSeverity('error');
+      setMsg('You cant order 0 products');
+      setOpen(true);
+      return;
+    }
+
+    dispatch({
+      type: actions.ADD_TO_CART,
+      payload: {
+        data,
+        quantity: qty
+      }
+    });
+
+    setSeverity('success');
+    setMsg('Product added to cart');
+    setQty(0);
+  };
 
   const fetchMeal = async () => {
     const url = `${BASE_URL}/meals.json?orderBy="$key"&equalTo="${id}"`;
     const result = await request({ url });
     // console.log();
-    setMeal(result[id])
+    setData(result[id]);
   };
 
   const handleGoBack = () => {
-    navigate("meals/")
-  }
+    navigate('/react-meals/meals/');
+  };
+
+  const handleGoToOrder = () => {
+    navigate('/react-meals/order/');
+  };
 
   useEffect(() => {
     fetchMeal();
-  }, [request]);
-
+    handleRange(0, 25);
+  }, []);
 
   return (
     <>
-      <Grid container spacing={2}>
-        {/* img grid */}
-        <Grid item xs={4} lg={1}>
-          <>
-            <img
-              src={meal.image}
-              alt="food img"
-              loading="lazy"
-              style={myStyles.image}
-            />
-          </>
-        </Grid>
-        {/* data grid */}
-        <Grid item xs={4} lg={6}>
-          <>
-            <Typography gutterBottom variant="subtitle1" sx={myStyles.title}>
-              { meal.name}
+      <Grid container spacing={3} className={styles.container}>
+        <Grid item lg={12} xs={12} rowSpacing={3}>
+          <Paper elevation={2} className={[styles.paper, styles.alignmentCenter].join(' ')}>
+            <Typography variant="h4" className={styles.h4}>
+              {data.name}
             </Typography>
-            <Typography variant="body2" gutterBottom sx={myStyles.txt}>
-              {meal.description}
-            </Typography>
-          </>
-        </Grid>
-        {/* price grid */}
-        <Grid item xs={2} lg={2}>
-          <Typography variant="subtitle1" component="div" sx={myStyles.price}>
-            ${meal.price}
-          </Typography>
+            <Typography paragraph={true}>{data.description}</Typography>
+          </Paper>
+          <Paper elevation={2} className={[styles.paper, styles.alignmentStart].join(' ')}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} lg={6}>
+                <img src={data.image} alt="food img" loading="lazy" className={styles.image} />
+              </Grid>
+              <Grid item xs={12} lg={6}>
+                <Typography variant="h4" className={styles.h4}>
+                  ${data.price}
+                </Typography>
+                <Grid container className={styles.shoppingContainer}>
+                  {/* select grid */}
+                  <Grid item xs={3} lg={1} className={styles.shoppingItem}>
+                    <InputLabel>
+                      <Typography gutterBottom variant="subtitle1" className={styles.txt}>
+                        Quantity
+                      </Typography>
+                    </InputLabel>
+                    <Select
+                      value={qty}
+                      label="quantity"
+                      onChange={handleChange}
+                      className={[styles.txt, styles.select].join(' ')}>
+                      {range.map((n, key) => (
+                        <MenuItem value={n} key={key}>
+                          {n}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </Grid>
+                  {/* add to cart grid */}
+                  <Grid item xs={3} lg={2} className={styles.shoppingItem}>
+                    <InputLabel>
+                      <Typography gutterBottom variant="subtitle1" className={styles.txt}>
+                        Add to cart
+                      </Typography>
+                    </InputLabel>
+                    <IconButton onClick={handleClick} className={styles.iconButton}>
+                      <AddShoppingCartIcon />
+                    </IconButton>
+                  </Grid>
+                  <Grid item xs={12} lg={12} className={styles.btnContainer}>
+                    <Button
+                      className={styles.btnOrder}
+                      onClick={handleGoToOrder}
+                      endIcon={<CheckIcon />}>
+                      Go to order
+                    </Button>
+                  </Grid>
+                  <Grid item xs={12} lg={12} className={styles.btnContainer}>
+                    <Button
+                      className={styles.btnOrder}
+                      onClick={handleGoBack}
+                      endIcon={<CancelIcon />}>
+                      Go back
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Paper>
         </Grid>
       </Grid>
+      {open && <SnackBar open={open} handleClose={handleClose} severity={severity} msg={msg} />}
     </>
   );
 };

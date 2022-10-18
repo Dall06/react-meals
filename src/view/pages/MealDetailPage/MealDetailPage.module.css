@@ -1,0 +1,69 @@
+.container {
+  display: flex;
+}
+
+.paper {
+  background-color: #121212;
+  color: rgba(255, 255, 255, 0.5);
+  background: #151515;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.alignmentCenter {
+  text-align: start;
+}
+
+.alignmentStart {
+  text-align: start;
+}
+
+.h4 {
+  font-weight: bold;
+  color: #42a5f5;
+}
+
+.image {
+  width: 50%;
+  height: auto;
+}
+
+.txt {
+  color: rgba(255, 255, 255, 0.5);
+  align-items: left;
+}
+
+.title {
+  font-weight: bold;
+  color: #e3f2fd;
+}
+
+.price {
+  font-weight: bold;
+  align-items: center;
+  color: #0288d1;
+}
+
+.btnOrder {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 1rem;
+  text-transform: none;
+  text-decoration: none;
+}
+
+.select {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.shoppingContainer {
+  width: 100%;
+}
+
+.shoppingItem {
+  margin: 1rem;
+}
+
+.btnContainer {
+  width: 100%;
+  margin: 1rem;
+}

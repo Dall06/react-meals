@@ -1,7 +1,7 @@
-import React from "react";
-import CartContextProvider from "./context/CartContext/CartProvider";
-import MealsContextProvider from "./context/MealsContext/MealsProvider";
-import MyRouterProvider from "./routes/RouterProvider";
+import React from 'react';
+import CartContextProvider from '../core/context/CartContext/CartProvider';
+import MealsContextProvider from '../core/context/MealsContext/MealsProvider';
+import MyRouterProvider from '../base/routes/RouterProvider';
 
 const View = () => {
   return (

@@ -1,84 +1,84 @@
-import React, { useContext, useState, useEffect } from "react";
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import CartContext from "../../context/CartContext/CartContext";
-import OrderList from "../../components/OrderList/OrderList";
-import Divider from "@mui/material/Divider";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import CloseIcon from "@mui/icons-material/Close";
-import CheckIcon from "@mui/icons-material/Check";
-import ErrorSnackBar from "../../common/SnackBar/ErrorSnackBar";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useState, useEffect } from 'react';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import CartContext from '../../../core/context/CartContext/CartContext';
+import OrderList from '../../components/OrderList/OrderList';
+import Divider from '@mui/material/Divider';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import CloseIcon from '@mui/icons-material/Close';
+import CheckIcon from '@mui/icons-material/Check';
+import ErrorSnackBar from '../../common/SnackBar/SnackBar';
+import { useNavigate } from 'react-router-dom';
 
 const myStyles = {
   container: {
-    display: "flex",
-    padding: "1rem",
+    display: 'flex',
+    padding: '1rem'
   },
   paper: {
-    backgroundColor: "#121212",
-    color: "rgba(255, 255, 255, 0.5)",
-    background: "#151515",
-    lineHeight: "60px",
-    padding: "1rem",
+    backgroundColor: '#121212',
+    color: 'rgba(255, 255, 255, 0.5)',
+    background: '#151515',
+    lineHeight: '60px',
+    padding: '1rem'
   },
   alignment: {
-    textAlign: "center",
+    textAlign: 'center'
   },
   h4: {
-    fontWeight: "bold",
-    color: "#42a5f5",
+    fontWeight: 'bold',
+    color: '#42a5f5'
   },
   alignmentStart: {
-    textAlign: "start",
+    textAlign: 'start'
   },
   txt: {
-    textAlign: "left",
-    color: "rgba(255, 255, 255, 0.5)",
-    align: "left",
+    textAlign: 'left',
+    color: 'rgba(255, 255, 255, 0.5)',
+    align: 'left'
   },
   price: {
-    fontWeight: "bold",
-    align: "center",
-    color: "#e3f2fd",
+    fontWeight: 'bold',
+    align: 'center',
+    color: '#e3f2fd'
   },
   buttonBox: {
-    marginTop: "2rem",
-    justifyContent: "end",
+    marginTop: '2rem',
+    justifyContent: 'end'
   },
   box: {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: "80%",
-    bgcolor: "#121212",
-    border: "2px solid #000",
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '80%',
+    bgcolor: '#121212',
+    border: '2px solid #000',
     boxShadow: 24,
-    p: 4,
+    p: 4
   },
   title: {
-    textAlign: "left",
-    fontWeight: "bold",
-    color: "#0288d1",
+    textAlign: 'left',
+    fontWeight: 'bold',
+    color: '#0288d1'
   },
   list: {
-    width: "100%",
-    position: "relative",
-    overflow: "auto",
-    maxHeight: "100%",
+    width: '100%',
+    position: 'relative',
+    overflow: 'auto',
+    maxHeight: '100%'
   },
   divider: {
-    margin: "1rem",
+    margin: '1rem'
   },
   button: {
-    textTransform: "none",
+    textTransform: 'none'
   },
   stack: {
-    justifyContent: "end",
-  },
+    justifyContent: 'end'
+  }
 };
 
 const CheckOutPage = () => {
@@ -113,7 +113,7 @@ const CheckOutPage = () => {
 
   const handleGoToMeals = (event) => {
     event.preventDefault();
-    navigate("/meals");
+    navigate('/meals');
   };
 
   useEffect(() => {
@@ -146,11 +146,7 @@ const CheckOutPage = () => {
             </Grid>
             <Grid item container sx={myStyles.buttonBox}>
               <Stack direction="row" spacing={2}>
-                <Button
-                  startIcon={<CloseIcon />}
-                  sx={myStyles.button}
-                  onClick={handleGoToMeals}
-                >
+                <Button startIcon={<CloseIcon />} sx={myStyles.button} onClick={handleGoToMeals}>
                   Cancel
                 </Button>
                 <Button
