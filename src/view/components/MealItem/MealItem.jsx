@@ -119,7 +119,8 @@ const mealItem = ({ data, id }) => {
             value={qty}
             label="quantity"
             onChange={handleChange}
-            className={[styles.txt, styles.select].join(' ')}>
+            className={[styles.txt, styles.select].join(' ')}
+          >
             {range.map((n, key) => (
               <MenuItem value={n} key={key}>
                 {n}
