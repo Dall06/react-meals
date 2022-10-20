@@ -1,34 +1,10 @@
-import React, { Fragment } from "react";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
+import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import styles from './OrderItem.module.css';
 
-const myStyles = {
-  txt: {
-    color: "rgba(255, 255, 255, 0.5)",
-    align: "left",
-  },
-  select: {
-    boxShadow: 3,
-  },
-  title: {
-    fontWeight: "bold",
-    color: "#e3f2fd",
-  },
-  price: {
-    fontWeight: "bold",
-    align: "center",
-    color: "#0288d1",
-  },
-  iconButton: {
-    boxShadow: 3,
-  },
-  image: {
-    width: "100%",
-    height: "5rem",
-  }
-};
-
-const OrderItem = (props) => {
+const orderItem = (props) => {
   const { data } = props;
 
   return (
@@ -36,23 +12,23 @@ const OrderItem = (props) => {
       {/* img grid */}
       <Grid item xs={4} lg={1}>
         <Fragment>
-          <img src={data.image} alt="food img" loading="lazy" style={myStyles.image}/>
+          <img src={data.image} alt="food img" loading="lazy" className={styles.image} />
         </Fragment>
       </Grid>
       {/* data grid */}
       <Grid item xs={4} lg={6}>
         <Fragment>
-          <Typography gutterBottom variant="subtitle1" sx={myStyles.title}>
+          <Typography gutterBottom variant="subtitle1" className={styles.title}>
             {data.name}
           </Typography>
-          <Typography variant="body2" gutterBottom sx={myStyles.txt}>
+          <Typography variant="body2" gutterBottom className={styles.txt}>
             {data.description}
           </Typography>
         </Fragment>
       </Grid>
       {/* price grid */}
       <Grid item xs={2} lg={2}>
-        <Typography variant="subtitle1" component="div" sx={myStyles.price}>
+        <Typography variant="subtitle1" component="div" className={styles.price}>
           ${data.price}
         </Typography>
       </Grid>
@@ -60,4 +36,8 @@ const OrderItem = (props) => {
   );
 };
 
-export default OrderItem;
+orderItem.propTypes = {
+  data: PropTypes.object
+};
+
+export default orderItem;

@@ -1,0 +1,79 @@
+.container {
+  display: flex;
+  padding: 1rem;
+}
+
+.paper {
+  background-color: #121212;
+  color: rgba(255, 255, 255, 0.5);
+  background: #151515;
+  line-height: 60px;
+  padding: 1rem;
+}
+
+.alignment {
+  text-align: center;
+}
+
+.h4 {
+  font-weight: bold;
+  color: #42a5f5;
+};
+
+.alignmentStart {
+  text-align: 'start'
+};
+
+.txt {
+  text-align: left;
+  color: rgba(255, 255, 255, 0.5);
+  align-items: left;
+}
+
+.price {
+  font-weight: bold;
+  align-items: center;
+  color: #e3f2fd;
+}
+
+.buttonBox {
+  margin-top: 2rem;
+  justify-content: end;
+}
+
+.box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  background-color: #121212;
+  border: 2px solid #000;
+  box-shadow: 24;
+  padding: 1rem;
+}
+
+.title {
+  text-align: left;
+  font-weight: bold;
+  color: #0288d1;
+}
+
+.list {
+  width: 100%;
+  position: relative;
+  overflow: auto;
+  max-height: 100%;
+}
+
+.divider {
+  margin: 1rem;
+}
+
+.button {
+  text-transform: none;
+}
+
+.stack {
+  justify-content: end;
+}

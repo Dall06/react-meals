@@ -1,52 +1,22 @@
-import React, { useContext } from "react";
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
+import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
-import ListItemText from "@mui/material/ListItemText";
-import DeleteIcon from "@mui/icons-material/Delete";
+import ListItemText from '@mui/material/ListItemText';
+import DeleteIcon from '@mui/icons-material/Delete';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import CartContext from "../../context/CartContext/CartContext";
-import CartAction from "../../context/CartContext/Actions";
+import CartContext from '../../../core/context/CartContext/CartContext';
+import CartAction from '../../../core/context/CartContext/Actions';
+import styles from './CartItem.module.css';
 
-const myStyles = {
-  box: {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: "80%",
-    bgcolor: "#121212",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-  },
-  txt: {
-    textAlign: "left",
-    color: "rgba(255, 255, 255, 0.5)",
-    align: "left",
-  },
-  title: {
-    textAlign: "left",
-    fontWeight: "bold",
-    color: "#0288d1",
-  },
-  price: {
-    fontWeight: "bold",
-    align: "center",
-    color: "#e3f2fd",
-  },
-  closeIcon: {
-    color: "#d32f2f",
-  },
-};
-
-const CartItem = (props) => {
+const item = (props) => {
   const { data } = props;
   const actions = CartAction;
 
   // eslint-disable-next-line no-unused-vars
-  const { dispatch } = useContext(CartContext)
+  const { dispatch } = useContext(CartContext);
 
   const handleAddCount = (event) => {
     event.preventDefault();
@@ -54,8 +24,8 @@ const CartItem = (props) => {
     dispatch({
       type: actions.ADD_COUNT,
       payload: {
-        data,
-      },
+        data
+      }
     });
   };
 
@@ -65,8 +35,8 @@ const CartItem = (props) => {
     dispatch({
       type: actions.MINUS_COUNT,
       payload: {
-        data,
-      },
+        data
+      }
     });
   };
 
@@ -76,30 +46,21 @@ const CartItem = (props) => {
     dispatch({
       type: actions.REMOVE_FROM_CART,
       payload: {
-        data,
-      },
+        data
+      }
     });
   };
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} className={styles.item}>
       <Grid item xs={4} sm={4}>
-        <ListItemText
-          primary={data.name}
-          sx={myStyles.title}
-        />
+        <ListItemText primary={data.name} className={styles.title} />
       </Grid>
       <Grid item xs={4} sm={2}>
-        <ListItemText
-          primary={`x${data.quantity}`}
-          sx={myStyles.txt}
-        />
+        <ListItemText primary={`x${data.quantity}`} className={styles.txt} />
       </Grid>
       <Grid item xs={4} sm={2}>
-        <ListItemText
-          primary={`$${(data.price * data.quantity)}`}
-          sx={myStyles.price}
-        />
+        <ListItemText primary={`$${data.price * data.quantity}`} className={styles.price} />
       </Grid>
       <Grid item xs={4} sm={4}>
         <ButtonGroup>
@@ -109,13 +70,17 @@ const CartItem = (props) => {
           <Button aria-label="minus" onClick={handleMinusCount}>
             <RemoveIcon />
           </Button>
-          <Button aria-label="remove" onClick={handleRemove} sx={myStyles.closeIcon}>
+          <Button aria-label="remove" onClick={handleRemove} className={styles.closeIcon}>
             <DeleteIcon />
           </Button>
         </ButtonGroup>
       </Grid>
     </Grid>
-  )
-}
+  );
+};
 
-export default CartItem;
+item.propTypes = {
+  data: PropTypes.object
+};
+
+export default item;

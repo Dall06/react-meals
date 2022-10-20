@@ -1,61 +1,34 @@
-import React, { useState, Fragment, useEffect, useContext } from "react";
-import Grid from "@mui/material/Grid";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-import IconButton from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import CartContext from "../../context/CartContext/CartContext";
-import CartAction from "../../context/CartContext/Actions";
-import ErrorSnackBar from "../../common/SnackBar/ErrorSnackBar";
-import { useNavigate } from "react-router-dom";
+import React, { useState, Fragment, useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+import Grid from '@mui/material/Grid';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import IconButton from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import SnackBar from '../../layout/SnackBar/SnackBar';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import CartContext from '../../../core/context/CartContext/CartContext';
+import CartActions from '../../../core/context/CartContext/Actions';
+import styles from './MealItem.module.css';
 
-const myStyles = {
-  txt: {
-    color: "rgba(255, 255, 255, 0.5)",
-    align: "left",
-  },
-  select: {
-    boxShadow: 3
-  },
-  title: {
-    fontWeight: "bold",
-    color: "#e3f2fd",
-  },
-  price: {
-    fontWeight: "bold",
-    align: "center",
-    color: "#0288d1",
-  },
-  iconButton: {
-    boxShadow: 3
-  },
-  button: {
-    textDecoration: "none",
-    textTransform: 'none',
-    fontWeight: "bold",
-    color: "rgba(255, 255, 255, 0.7)"
-  },
-  image: {
-    width: "100%",
-    height: "5rem",
-  }
-};
-
-const MealItem = (props) => {
-  const { data, id } = props;
+const mealItem = ({ data, id }) => {
   const navigate = useNavigate();
-  const actions = CartAction;
+  const actions = CartActions;
 
   const [qty, setQty] = useState(0);
   const [range, setRange] = useState([0]);
   const [open, setOpen] = React.useState(false);
+  const [severity, setSeverity] = useState('error');
+  const [msg, setMsg] = useState('error generating snackbar');
 
-  const { dispatch } = useContext(CartContext)
+  const { dispatch } = useContext(CartContext);
 
   const handleClose = (event, reason) => {
+    event.preventDefault();
     if (reason === 'clickaway') {
       return;
     }
@@ -77,8 +50,10 @@ const MealItem = (props) => {
     event.preventDefault();
 
     if (qty === 0) {
-      console.log("error must be more than zero");
+      console.log('error must be more than zero');
       setOpen(true);
+      setSeverity('error');
+      setMsg('You cant order 0 products');
       return;
     }
 
@@ -86,10 +61,12 @@ const MealItem = (props) => {
       type: actions.ADD_TO_CART,
       payload: {
         data,
-        quantity: qty,
-      },
+        quantity: qty
+      }
     });
 
+    setSeverity('success');
+    setMsg('Product added to cart');
     setQty(0);
   };
 
@@ -99,78 +76,77 @@ const MealItem = (props) => {
 
   const handleGoToDetail = (event) => {
     event.preventDefault();
-    navigate(`/meals/${id}`)
-  }
+    navigate(`/react-meals/meals/${id}`);
+  };
 
   return (
-    <Grid container spacing={2}>
-      {/* select grid */}
-      <Grid item xs={3} lg={1}>
-        <InputLabel>
-          <Typography gutterBottom variant="subtitle1" sx={myStyles.txt}>
-            Quantity
+    <>
+      <Grid container spacing={2} className={styles.container}>
+        {/* img grid */}
+        <Grid item xs={4} lg={1}>
+          <Box>
+            <img src={data.image} alt="food img" loading="lazy" className={styles.image} />
+          </Box>
+        </Grid>
+        {/* data grid */}
+        <Grid item xs={4} lg={6}>
+          <Fragment>
+            <Typography gutterBottom variant="subtitle1" className={styles.title}>
+              {data.name}
+            </Typography>
+            <Typography variant="body2" gutterBottom className={styles.txt}>
+              {data.description}
+            </Typography>
+          </Fragment>
+        </Grid>
+        {/* price grid */}
+        <Grid item xs={2} lg={2}>
+          <Typography variant="subtitle1" component="div" className={styles.price}>
+            ${data.price}
           </Typography>
-        </InputLabel>
-        <Select
-          value={qty}
-          label="quantity"
-          onChange={handleChange}
-          sx={[myStyles.txt, myStyles.select]}
-        >
-          {range.map((n, key) => (
-            <MenuItem value={n} key={key}>
-              {n}
-            </MenuItem>
-          ))}
-        </Select>
+          <Button className={styles.button} onClick={handleGoToDetail}>
+            More...
+          </Button>
+        </Grid>
+        {/* select grid */}
+        <Grid item xs={3} lg={1}>
+          <InputLabel>
+            <Typography gutterBottom variant="subtitle1" className={styles.txt}>
+              Quantity
+            </Typography>
+          </InputLabel>
+          <Select
+            value={qty}
+            label="quantity"
+            onChange={handleChange}
+            className={[styles.txt, styles.select].join(' ')}>
+            {range.map((n, key) => (
+              <MenuItem value={n} key={key}>
+                {n}
+              </MenuItem>
+            ))}
+          </Select>
+        </Grid>
+        {/* add to cart grid */}
+        <Grid item xs={3} lg={2}>
+          <InputLabel>
+            <Typography gutterBottom variant="subtitle1" className={styles.txt}>
+              Add to cart
+            </Typography>
+          </InputLabel>
+          <IconButton onClick={handleClick} className={styles.iconButton}>
+            <AddShoppingCartIcon />
+          </IconButton>
+        </Grid>
+        {open && <SnackBar open={open} handleClose={handleClose} severity={severity} msg={msg} />}
       </Grid>
-      {/* add to cart grid */}
-      <Grid item xs={3} lg={2}>
-        <InputLabel>
-          <Typography gutterBottom variant="subtitle1" sx={myStyles.txt}>
-            Add to cart
-          </Typography>
-        </InputLabel>
-        <IconButton onClick={handleClick} sx={myStyles.iconButton}>
-          <AddShoppingCartIcon />
-        </IconButton>
-      </Grid>
-      {/* img grid */}
-      <Grid item xs={4} lg={1}>
-        <Fragment>
-        <img
-            src={data.image}
-            alt="food img"
-            loading="lazy"
-            style={myStyles.image}
-          />
-        </Fragment>
-      </Grid>
-      {/* data grid */}
-      <Grid item xs={4} lg={6}>
-        <Fragment>
-          <Typography gutterBottom variant="subtitle1" sx={myStyles.title}>
-            {data.name}
-          </Typography>
-          <Typography variant="body2" gutterBottom sx={myStyles.txt}>
-            {data.description}
-          </Typography>
-        </Fragment>
-      </Grid>
-      {/* price grid */}
-      <Grid item xs={2} lg={2}>
-        <Typography variant="subtitle1" component="div" sx={myStyles.price}>
-          ${data.price}
-        </Typography>
-        <Button sx={myStyles.button} onClick={handleGoToDetail}>More...</Button>
-      </Grid>
-      {
-        open && (
-          <ErrorSnackBar open={open} handleClose={handleClose} severity="error" msg="Error: you cant order 0 products"/>
-        )
-      }
-    </Grid>
+    </>
   );
 };
 
-export default MealItem;
+mealItem.propTypes = {
+  data: PropTypes.object,
+  id: PropTypes.any
+};
+
+export default mealItem;

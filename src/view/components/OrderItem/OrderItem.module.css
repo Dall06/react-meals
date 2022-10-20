@@ -1,0 +1,28 @@
+.txt {
+  color: rgba(255, 255, 255, 0.5);
+  align-items: left;
+}
+
+.select {
+  box-shadow: 3
+}
+
+.title {
+  font-weight: bold;
+  color: #e3f2fd;
+}
+
+.price {
+  font-weight: bold;
+  align-items: center;
+  color: #0288d1;
+}
+
+.iconButton {
+  box-shadow: 3
+}
+
+.image {
+  width: 100%;
+  height: 5rem;
+}

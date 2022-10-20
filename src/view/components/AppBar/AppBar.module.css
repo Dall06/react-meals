@@ -1,0 +1,20 @@
+.txt {
+  font-weight: bold;
+  margin-right: 1rem;
+}
+
+.box {
+  flex-grow: 1;
+  display: flex;
+  gap: 1em;
+}
+
+.box0 {
+  flex-grow: 0;
+}
+
+.button {
+  color: 'white';
+  text-transform: none;
+  margin: 1;
+}

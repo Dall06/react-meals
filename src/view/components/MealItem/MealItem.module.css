@@ -1,0 +1,43 @@
+.txt {
+  color: rgba(255, 255, 255, 0.5);
+  align-items: left;
+}
+
+.title {
+  font-weight: bold;
+  color: #e3f2fd;
+}
+
+.price {
+  font-weight: bold;
+  align-items: center;
+  color: #0288d1;
+}
+
+.iconButton {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 1rem;
+}
+
+.select {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.button {
+  text-decoration: none;
+  text-transform: none;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.7);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin: 1rem 0 1rem 0;
+}
+
+.image {
+  object-fit: cover;
+  width: 99%;
+  height: 100px;
+}
+
+.container {
+  margin-bottom: 1rem;
+}

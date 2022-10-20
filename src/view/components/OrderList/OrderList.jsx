@@ -1,76 +1,92 @@
-import React, { Fragment } from "react";
-import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
-import OrderItem from "../OrderItem/OrderItem";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import List from '../../layout/List/List';
+import Paper from '../../layout/Paper/Paper';
+import OrderItem from '../OrderItem/OrderItem';
+import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import CloseIcon from '@mui/icons-material/Close';
+import CheckIcon from '@mui/icons-material/Check';
+import SnackBar from '../../layout/SnackBar/SnackBar';
+import { useNavigate } from 'react-router-dom';
+import styles from './OrderList.module.css';
 
-const myStyles = {
-  list: {
-    width: "100%",
-    position: "relative",
-    overflow: "auto",
-    maxHeight: "100%",
-  },
-  box: {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: "80%",
-    bgcolor: "#121212",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-  },
-  txt: {
-    textAlign: "left",
-    color: "rgba(255, 255, 255, 0.5)",
-    align: "left",
-  },
-  title: {
-    textAlign: "left",
-    fontWeight: "bold",
-    color: "#0288d1",
-  },
-  price: {
-    fontWeight: "bold",
-    align: "center",
-    color: "#e3f2fd",
-  },
-  buttonBox: {
-    marginTop: "2rem",
-    justifyContent: "end",
-  },
-  container: {
-    display: "flex",
-  },
-  divider: {
-    margin: "1rem"
-  },
-  button: {
-    textTransform: 'none',
-  }
-}
+const orderList = (props) => {
+  const { list, total, disabled } = props;
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
 
-const OrderList = (props) => {
-  const { list } = props;
+  const handleClose = (event, reason) => {
+    event.preventDefault();
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    setOpen(true);
+  };
+
+  const handleGoToMeals = (event) => {
+    event.preventDefault();
+    navigate('/react-meals/meals');
+  };
 
   return (
     <>
-      {list.length > 0 ? (
-        <List dense={true} sx={myStyles.list}>
-          {list.map((m, key) => (
-            <Fragment key={key}>
+      <Paper elevation={2} className={styles.paper}>
+        <Grid item>
+          <List message="No meals found in your order" len={list.length}>
+            {list.map((m) => (
               <OrderItem key={m.id} data={m} />
-            </Fragment>
-          ))}
-        </List>
-      ) : (
-        <Typography gutterBottom sx={myStyles.txt} role="txt">
-          Your order is empty...
-        </Typography>
-      )}
+            ))}
+          </List>
+        </Grid>
+        <Grid item container style={styles.stack}>
+          <Stack direction="row" spacing={2}>
+            <Typography className={styles.txt}>Order cost</Typography>
+            <Typography className={styles.price}>${total}</Typography>
+          </Stack>
+        </Grid>
+        <Grid item container className={styles.buttonBox}>
+          <Stack direction="row" spacing={2}>
+            <Button startIcon={<CloseIcon />} className={styles.button} onClick={handleGoToMeals}>
+              Cancel
+            </Button>
+            <Button
+              variant="contained"
+              className={styles.button}
+              disabled={disabled}
+              onClick={handleClick}
+              endIcon={<CheckIcon />}>
+              Continue
+            </Button>
+            {open && (
+              <SnackBar
+                open={open}
+                handleClose={handleClose}
+                severity="warning"
+                msg="TODO: method not implemented"
+              />
+            )}
+          </Stack>
+        </Grid>
+      </Paper>
     </>
   );
 };
 
-export default OrderList;
+orderList.propTypes = {
+  list: PropTypes.array,
+  total: PropTypes.number,
+  disabled: PropTypes.bool,
+  handleClick: PropTypes.func,
+  handleClose: PropTypes.func
+};
+
+export default orderList;

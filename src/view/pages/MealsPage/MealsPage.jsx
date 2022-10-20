@@ -1,52 +1,25 @@
-import React, { useContext } from "react";
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import MealsList from "../../components/MealsList/MealsList";
-import MealsContext from "../../context/MealsContext/MealsContext";
+import React, { useContext } from 'react';
+import Header from '../../layout/Header/Header';
+import Grid from '@mui/material/Grid';
+import MealsList from '../../components/MealsList/MealsList';
+import Paper from '../../layout/Paper/Paper';
+import MealsContext from '../../../core/context/MealsContext/MealsContext';
+import styles from './MealsPage.module.css';
 
-const myStyles = {
-  container: {
-    display: "flex",
-    padding: "1rem",
-  },
-  paper: {
-    backgroundColor: "#121212",
-    color: "rgba(255, 255, 255, 0.5)",
-    background: "#151515",
-    lineHeight: "60px",
-    padding: "1rem",
-  },
-  listPaper: {
-    height: "60vh"
-  },
-  alignment: {
-    textAlign: "start",
-  },
-  h4: {
-    fontWeight: "bold",
-    color: "#42a5f5"
-  },
-};
-
-const MealsPage = () => {
+const mealsPage = () => {
   const { meals } = useContext(MealsContext);
 
   return (
     <>
-      <Grid container spacing={3} sx={myStyles.container}>
-        <Grid item lg={12} xs={12} rowSpacing={3}>
-          <Paper elevation={2} sx={[myStyles.paper, myStyles.alignment]}>
-            <Typography variant="h4" sx={myStyles.h4}>
-              Let me show you our meals
-            </Typography>
-            <Typography paragraph={true}>
-              Choose as many as you wish
-            </Typography>
-          </Paper>
+      <Grid container className={styles.container}>
+        <Grid item lg={12} xs={12}>
+          <Header
+            head="Our Meals"
+            description="These are some meals that we offer you, choose as many as you like"
+          />
         </Grid>
-        <Grid item xs>
-          <Paper elevation={2} sx={[myStyles.paper, myStyles.listPaper]}>
+        <Grid item lg={12} xs={12}>
+          <Paper>
             <MealsList list={meals} />
           </Paper>
         </Grid>
@@ -55,4 +28,4 @@ const MealsPage = () => {
   );
 };
 
-export default MealsPage;
+export default mealsPage;

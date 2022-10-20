@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1665429091410" clover="3.2.0">
-  <project timestamp="1665429091410" name="All files">
+<coverage generated="1665518479684" clover="3.2.0">
+  <project timestamp="1665518479684" name="All files">
     <metrics statements="53" coveredstatements="40" conditionals="10" coveredconditionals="5" methods="15" coveredmethods="11" elements="78" coveredelements="56" complexity="0" loc="53" ncloc="53" packages="6" files="7" classes="7"/>
-    <package name="common.SnackBar">
+    <package name="core.context.CartContext">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="Actions.js" path="/Users/diegoa.leon/Desktop/react-meals/src/core/context/CartContext/Actions.js">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+      </file>
+      <file name="CartContext.jsx" path="/Users/diegoa.leon/Desktop/react-meals/src/core/context/CartContext/CartContext.jsx">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="view.common.SnackBar">
       <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <file name="ErrorSnackBar.jsx" path="C:\Users\233134\Documents\js\react-meals\src\view\common\SnackBar\ErrorSnackBar.jsx">
+      <file name="SnackBar.jsx" path="/Users/diegoa.leon/Desktop/react-meals/src/view/common/SnackBar/SnackBar.jsx">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="3" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="components.MealItem">
+    <package name="view.components.MealItem">
       <metrics statements="34" coveredstatements="21" conditionals="6" coveredconditionals="1" methods="9" coveredmethods="5"/>
-      <file name="MealItem.jsx" path="C:\Users\233134\Documents\js\react-meals\src\view\components\MealItem\MealItem.jsx">
+      <file name="MealItem.jsx" path="/Users/diegoa.leon/Desktop/react-meals/src/view/components/MealItem/MealItem.jsx">
         <metrics statements="34" coveredstatements="21" conditionals="6" coveredconditionals="1" methods="9" coveredmethods="5"/>
         <line num="15" count="2" type="stmt"/>
         <line num="47" count="2" type="stmt"/>
@@ -51,9 +62,9 @@
         <line num="121" count="78" type="stmt"/>
       </file>
     </package>
-    <package name="components.MealsList">
+    <package name="view.components.MealsList">
       <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
-      <file name="MealsList.jsx" path="C:\Users\233134\Documents\js\react-meals\src\view\components\MealsList\MealsList.jsx">
+      <file name="MealsList.jsx" path="/Users/diegoa.leon/Desktop/react-meals/src/view/components/MealsList/MealsList.jsx">
         <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="7" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
@@ -62,9 +73,9 @@
         <line num="24" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="components.OrderItem">
+    <package name="view.components.OrderItem">
       <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <file name="OrderItem.jsx" path="C:\Users\233134\Documents\js\react-meals\src\view\components\OrderItem\OrderItem.jsx">
+      <file name="OrderItem.jsx" path="/Users/diegoa.leon/Desktop/react-meals/src/view/components/OrderItem/OrderItem.jsx">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="2" type="stmt"/>
         <line num="31" count="2" type="stmt"/>
@@ -72,26 +83,15 @@
         <line num="34" count="2" type="stmt"/>
       </file>
     </package>
-    <package name="components.OrderList">
+    <package name="view.components.OrderList">
       <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
-      <file name="OrderList.jsx" path="C:\Users\233134\Documents\js\react-meals\src\view\components\OrderList\OrderList.jsx">
+      <file name="OrderList.jsx" path="/Users/diegoa.leon/Desktop/react-meals/src/view/components/OrderList/OrderList.jsx">
         <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="6" count="1" type="stmt"/>
         <line num="54" count="1" type="stmt"/>
         <line num="55" count="2" type="stmt"/>
         <line num="57" count="2" type="stmt"/>
         <line num="62" count="1" type="stmt"/>
-      </file>
-    </package>
-    <package name="context.CartContext">
-      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="Actions.js" path="C:\Users\233134\Documents\js\react-meals\src\view\context\CartContext\Actions.js">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="2" type="stmt"/>
-      </file>
-      <file name="CartContext.jsx" path="C:\Users\233134\Documents\js\react-meals\src\view\context\CartContext\CartContext.jsx">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
       </file>
     </package>
   </project>
