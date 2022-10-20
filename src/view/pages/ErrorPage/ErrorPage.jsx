@@ -5,38 +5,7 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
-
-const myStyles = {
-  container: {
-    display: 'flex',
-    padding: '1rem'
-  },
-  paper: {
-    backgroundColor: '#121212',
-    color: 'rgba(255, 255, 255, 0.5)',
-    background: '#151515',
-    lineHeight: '60px',
-    padding: '1rem'
-  },
-  alignment: {
-    textAlign: 'center'
-  },
-  h4: {
-    fontWeight: 'bold',
-    color: '#42a5f5'
-  },
-  txt: {
-    fontWeight: 'bold',
-    mr: 2
-  },
-  linkTxt: {
-    textTransform: 'none',
-    textDecoration: 'none'
-  },
-  box: {
-    margin: '2rem'
-  }
-};
+import styles from './ErrorPage.module.css';
 
 const ErrorPage = () => {
   const error = useRouteError();
@@ -46,22 +15,22 @@ const ErrorPage = () => {
 
   const handleGoToHome = (event) => {
     event.preventDefault();
-    navigate('/');
+    navigate('react-meals/');
   };
 
   return (
     <>
-      <Grid container spacing={3} sx={myStyles.container}>
+      <Grid container spacing={3} className={styles.container}>
         <Grid item lg={12} xs={12} rowSpacing={3}>
-          <Paper elevation={2} sx={[myStyles.paper, myStyles.alignment]}>
-            <Typography variant="h4" sx={myStyles.h4}>
+          <Paper elevation={2} className={[styles.paper, styles.alignment]}>
+            <Typography variant="h4" className={styles.h4}>
               Oops!... Sorry, an unexpected error has occurred.
             </Typography>
-            <Box sx={myStyles.box}>
+            <Box className={styles.box}>
               <Typography paragraph={true}>{error.status}</Typography>
               <Typography paragraph={true}>{error.statusText || error.message}</Typography>
             </Box>
-            <Button onClick={handleGoToHome} sx={[myStyles.linkTxt, myStyles.txt]}>
+            <Button onClick={handleGoToHome} className={[styles.linkTxt, styles.txt]}>
               <Link>Click me to return</Link>
             </Button>
           </Paper>

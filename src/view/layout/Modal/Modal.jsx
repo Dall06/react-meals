@@ -3,28 +3,30 @@ import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import Modal from '@mui/material/Modal';
 import Grid from '@mui/material/Grid';
-import styles from './MyModal.module.css';
+import styles from './Modal.module.css';
 
-const MyModal = (props) => {
+const modal = (props) => {
   const { open, onClose } = props;
 
   // return ReactDOM.createPortal(
   return createPortal(
-    <Modal
-      open={open}
-      onClose={onClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-      id="modal">
-      <Grid className={styles.box} container>
-        {props.children}
-      </Grid>
-    </Modal>,
+    <>
+      <Modal
+        open={open}
+        onClose={onClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        id="modal">
+        <Grid className={styles.box} container>
+          {props.children}
+        </Grid>
+      </Modal>{' '}
+    </>,
     document.getElementById('modal-root')
   );
 };
 
-MyModal.propTypes = {
+modal.propTypes = {
   cart: PropTypes.array,
   total: PropTypes.number,
   open: PropTypes.bool,
@@ -32,4 +34,4 @@ MyModal.propTypes = {
   checkout: PropTypes.func
 };
 
-export default MyModal;
+export default modal;

@@ -1,10 +1,10 @@
-import Root from '../../view/pages/Root/Root';
 import { createBrowserRouter } from 'react-router-dom';
+import Root from '../../view/Root';
 import ErrorPage from '../../view/pages/ErrorPage/ErrorPage';
 import HomePage from '../../view/pages/HomePage/HomePage';
 import MealsPage from '../../view/pages/MealsPage/MealsPage';
 import MealDetailPage from '../../view/pages/MealDetailPage/MealDetailPage';
-/*import CheckOutPage from "../../view/pages/CheckOutPage/CheckOutPage";*/
+import CheckOutPage from '../../view/pages/CheckOutPage/CheckOutPage';
 
 const Router = createBrowserRouter([
   {
@@ -26,11 +26,11 @@ const Router = createBrowserRouter([
           {
             path: '/react-meals/meals/:id',
             element: <MealDetailPage />
-          }
-          /*{
-            path: "/react-meals/check-out",
+          },
+          {
+            path: '/react-meals/checkout',
             element: <CheckOutPage />
-          }*/
+          }
         ]
       }
     ]

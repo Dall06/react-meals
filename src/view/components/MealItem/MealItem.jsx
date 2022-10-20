@@ -9,19 +9,21 @@ import IconButton from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import SnackBar from '../../common/SnackBar/SnackBar';
+import SnackBar from '../../layout/SnackBar/SnackBar';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import CartContext from '../../../core/context/CartContext/CartContext';
 import CartActions from '../../../core/context/CartContext/Actions';
 import styles from './MealItem.module.css';
 
-const MealItem = ({ data, id }) => {
+const mealItem = ({ data, id }) => {
   const navigate = useNavigate();
   const actions = CartActions;
 
   const [qty, setQty] = useState(0);
   const [range, setRange] = useState([0]);
   const [open, setOpen] = React.useState(false);
+  const [severity, setSeverity] = useState('error');
+  const [msg, setMsg] = useState('error generating snackbar');
 
   const { dispatch } = useContext(CartContext);
 
@@ -50,6 +52,8 @@ const MealItem = ({ data, id }) => {
     if (qty === 0) {
       console.log('error must be more than zero');
       setOpen(true);
+      setSeverity('error');
+      setMsg('You cant order 0 products');
       return;
     }
 
@@ -61,6 +65,8 @@ const MealItem = ({ data, id }) => {
       }
     });
 
+    setSeverity('success');
+    setMsg('Product added to cart');
     setQty(0);
   };
 
@@ -132,22 +138,15 @@ const MealItem = ({ data, id }) => {
             <AddShoppingCartIcon />
           </IconButton>
         </Grid>
-        {open && (
-          <SnackBar
-            open={open}
-            handleClose={handleClose}
-            severity="error"
-            msg="Error: you cant order 0 products"
-          />
-        )}
+        {open && <SnackBar open={open} handleClose={handleClose} severity={severity} msg={msg} />}
       </Grid>
     </>
   );
 };
 
-MealItem.propTypes = {
+mealItem.propTypes = {
   data: PropTypes.object,
   id: PropTypes.any
 };
 
-export default MealItem;
+export default mealItem;

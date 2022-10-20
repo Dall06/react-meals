@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react';
-import PropTypes from 'prop-types';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Button from '@mui/material/Button';
-import MyModal from '../../common/MyModal/MyModal';
+import Modal from '../../layout/Modal/Modal';
 import CartContext from '../../../core/context/CartContext/CartContext';
 import CartList from '../CartList/CartList';
+import { useNavigate } from 'react-router-dom';
 
-const CartButton = (props) => {
-  const { checkout } = props;
+const cart = () => {
+  const navigate = useNavigate();
 
   const { state } = useContext(CartContext);
   const [open, setOpen] = useState(false);
@@ -21,8 +21,9 @@ const CartButton = (props) => {
   };
 
   const handleCheckOut = (event) => {
+    event.preventDefault();
     setOpen(false);
-    checkout(event);
+    navigate('/react-meals/checkout');
   };
 
   return (
@@ -31,22 +32,18 @@ const CartButton = (props) => {
         {state.quantity}
       </Button>
       {open && (
-        <MyModal open={open} onClose={handleClose}>
+        <Modal open={open} onClose={handleClose}>
           <CartList
             cart={state.cart}
             total={state.total}
-            cartlen={state.quantity}
+            quantity={state.quantity}
             onCheckout={handleCheckOut}
             onClose={handleClose}
           />
-        </MyModal>
+        </Modal>
       )}
     </>
   );
 };
 
-CartButton.propTypes = {
-  checkout: PropTypes.func
-};
-
-export default CartButton;
+export default cart;

@@ -11,7 +11,7 @@ import CartContext from '../../../core/context/CartContext/CartContext';
 import CartAction from '../../../core/context/CartContext/Actions';
 import styles from './CartItem.module.css';
 
-const CartItem = (props) => {
+const item = (props) => {
   const { data } = props;
   const actions = CartAction;
 
@@ -52,7 +52,7 @@ const CartItem = (props) => {
   };
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} className={styles.item}>
       <Grid item xs={4} sm={4}>
         <ListItemText primary={data.name} className={styles.title} />
       </Grid>
@@ -79,8 +79,8 @@ const CartItem = (props) => {
   );
 };
 
-CartItem.propTypes = {
+item.propTypes = {
   data: PropTypes.object
 };
 
-export default CartItem;
+export default item;

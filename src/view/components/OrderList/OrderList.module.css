@@ -1,3 +1,10 @@
+.list {
+  width: 100%;
+  position: relative;
+  overflow: auto;
+  max-height: 100%;
+}
+
 .box {
   position: absolute;
   top: 50%;
@@ -6,8 +13,8 @@
   width: 80%;
   background-color: #121212;
   border: 2px solid #000;
-  box-shadow: 24px;
-  padding: 4rem;
+  box-shadow: 24;
+  padding: 1rem;
 }
 
 .txt {
@@ -28,11 +35,19 @@
   color: #e3f2fd;
 }
 
-.closeIcon {
-  color: #d32f2f;
+.buttonbox {
+  margin-top: 2rem;
+  justify-content: end;
 }
 
-.item {
-  margin-top: 0.2rem;
-  margin-bottom: 0.2rem;
+.container {
+  display: flex;
+}
+
+.divider {
+  margin: 1rem;
+}
+
+.button {
+  text-transform: none;
 }

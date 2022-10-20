@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  padding: 1rem;
+}
+
+.paper {
+  background-color: #121212;
+  color: rgba(255, 255, 255, 0.5);
+  background: #151515;
+  line-height: 60px;
+  padding: 1rem;
+}
+
+.alignment {
+  text-align: center;
+}
+
+.h4 {
+  font-weight: bold;
+  color: #42a5f5;
+}
+
+.txt {
+  font-weight: bold;
+  margin: 2rem;
+}
+
+.linktxt {
+  text-transform: none;
+  text-decoration: none;
+}
+
+.box {
+  margin: 2rem;
+}

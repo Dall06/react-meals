@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import NavBar from './NavBar';
+import AppBar from './AppBar';
 
 // Mock de toda la biblioteca "react-router-dom"
 jest.mock('react-router-dom', () => ({
@@ -10,7 +10,7 @@ jest.mock('react-router-dom', () => ({
 
 describe('NAVBAR', () => {
   it('should render open', async () => {
-    render(<NavBar />);
+    render(<AppBar />);
 
     const item = screen.getByRole('alert', {
       name: ''

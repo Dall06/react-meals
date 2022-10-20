@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import List from '@mui/material/List';
+import List from '../../layout/List/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
@@ -11,14 +11,15 @@ import Stack from '@mui/material/Stack';
 import CartItem from '../../components/CartItem/CartItem';
 import styles from './CartList.module.css';
 
-const CartList = (props) => {
-  const { cart, cartlen, total, onCheckout, onClose } = props;
+const cartList = (props) => {
+  const { cart, quantity, total, onCheckout, onClose } = props;
 
   const [disabled, setDisabled] = useState(true);
 
   const handleBlock = () => {
-    if (cartlen > 0) {
+    if (quantity > 0) {
       setDisabled(false);
+      console.log(disabled);
       return;
     }
     setDisabled(true);
@@ -27,7 +28,7 @@ const CartList = (props) => {
 
   useEffect(() => {
     handleBlock();
-  }, []);
+  }, [quantity]);
 
   return (
     <>
@@ -35,17 +36,11 @@ const CartList = (props) => {
         <Typography className={styles.title}>Meals order</Typography>
       </Grid>
       <Grid item container className={styles.container}>
-        {cart.length > 0 ? (
-          <List dense={true} className={styles.list}>
-            {cart.map((meal) => (
-              <CartItem key={meal.id} data={meal} />
-            ))}
-          </List>
-        ) : (
-          <Typography gutterBottom className={styles.txt}>
-            Your order is empty...
-          </Typography>
-        )}
+        <List message="No meals found" len={cart.length}>
+          {cart.map((m) => (
+            <CartItem key={m.id} data={m} id={m.id} />
+          ))}
+        </List>
       </Grid>
       <Grid item container>
         <Stack direction="row" spacing={2}>
@@ -79,12 +74,13 @@ const CartList = (props) => {
   );
 };
 
-CartList.propTypes = {
+cartList.propTypes = {
   cart: PropTypes.array,
   total: PropTypes.number,
   onCheckout: PropTypes.func,
   onClose: PropTypes.func,
-  cartlen: PropTypes.number
+  cartlen: PropTypes.number,
+  quantity: PropTypes.number
 };
 
-export default CartList;
+export default cartList;

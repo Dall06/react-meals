@@ -1,15 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import CartButton from '../../components/CartButton/CartButton';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+import styles from './AppBar.module.css';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
-import styles from './NavBar.module.css';
 
-const NavBar = () => {
+const appbar = (props) => {
   const navigate = useNavigate();
 
   const handleGoToHome = (event) => {
@@ -20,11 +20,6 @@ const NavBar = () => {
   const handleGoToMeals = (event) => {
     event.preventDefault();
     navigate('/react-meals/meals');
-  };
-
-  const handleGoToCheckOut = (event) => {
-    event.preventDefault();
-    navigate('/react-meals/check-out');
   };
 
   return (
@@ -41,9 +36,7 @@ const NavBar = () => {
                 Meals
               </Button>
             </Box>
-            <Box className={styles.box0}>
-              <CartButton checkout={handleGoToCheckOut} />
-            </Box>
+            <Box className={styles.box0}>{props.leadBtn}</Box>
           </Toolbar>
         </Container>
       </AppBar>
@@ -51,4 +44,10 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+appbar.propTypes = {
+  gotoHome: PropTypes.func,
+  goToMeals: PropTypes.func,
+  leadBtn: PropTypes.any
+};
+
+export default appbar;

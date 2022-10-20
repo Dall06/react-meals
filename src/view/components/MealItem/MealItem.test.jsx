@@ -1,8 +1,6 @@
-import { render, screen, within } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import MealItem from './MealItem';
-import userEvent from '@testing-library/user-event';
-import selectEvent from 'react-select-event';
 
 // Mock de toda la biblioteca "react-router-dom"
 jest.mock('react-router-dom', () => ({
@@ -32,8 +30,7 @@ describe('ORDER ITEM', () => {
   });
 
   it('should handle change', async () => {
-    const mockCallback = jest.fn();
-    const { getByTestId } = render(
+    render(
       <MealItem
         data-testid="my-wrapper"
         data={{

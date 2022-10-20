@@ -1,32 +1,28 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import List from '@mui/material/List';
+import List from '../../layout/List/List';
 import MealItem from '../MealItem/MealItem';
-import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 import styles from './MealsList.module.css';
 
-const MealsList = (props) => {
+const mealsList = (props) => {
   const { list } = props;
 
   return (
     <>
-      {list.length > 0 ? (
-        <List className={styles.list}>
+      <Container className={styles.container} disableGutters maxWidth={false}>
+        <List message="No meals found" len={list.length}>
           {list.map((m) => (
             <MealItem key={m.id} data={m} id={m.id} />
           ))}
         </List>
-      ) : (
-        <Typography gutterBottom className={styles.txt} role="txt">
-          No meals found in our system...
-        </Typography>
-      )}
+      </Container>
     </>
   );
 };
 
-MealsList.propTypes = {
+mealsList.propTypes = {
   list: PropTypes.array
 };
 
-export default MealsList;
+export default mealsList;
